@@ -1,0 +1,32 @@
+<app-alert></app-alert>
+<div id="main" class="">
+  <div id="start" class="shadow-lg p-5 mb-5 bg-body-tertiary rounded">
+    <h2 class="fw-bold d-flex justify-content-center">Kullanıcı Giriş</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email Adresi</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="newItem.email" formControlName="email">
+        @if (loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)) {
+        <p class="mt-1 fw-lighter">Geçerki Bir E-Mail adresi giriniz!</p>
+        @if (loginForm.get('email')?.hasError('required')) {
+        <p class="fw-lighter">E-Mail kısmı boş olamaz!</p>
+        }
+        }
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Şifre</label>
+        <input type="password" class="form-control" id="password" [(ngModel)]="newItem.password"
+          formControlName="password">
+        @if (loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty ||
+        loginForm.get('password')?.touched)) {
+        <p class="mt-1 fw-lighter">Şifre 6 haneden uzun olmalı!</p>
+        @if (loginForm.get('password')?.hasError('required')) {
+        <p class="fw-lighter">Şifre kısmı boş olamaz!</p>
+        }
+        }
+      </div>
+      <button type="submit" class="btn btn-primary">Giriş Yap</button>
+    </form>
+
+  </div>
+</div>
