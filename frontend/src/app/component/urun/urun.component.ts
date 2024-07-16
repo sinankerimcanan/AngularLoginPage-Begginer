@@ -32,7 +32,7 @@ export class UrunComponent {
       (response) => {
         this.responseData = response;
         console.log('Ürün Verileri Çekildi');
-        console.log(this.responseData)
+        console.log(response)
       },
       (error) => {
         console.log('Ürün Verileri çekilmedi');

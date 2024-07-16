@@ -8,6 +8,7 @@ import { AuthService } from '../service/auth.service';
 import { UrunComponent } from '../component/urun/urun.component';
 import { AboutComponent } from '../component/about/about.component';
 import { UploadUrunComponent } from '../component/upload-urun/upload-urun.component';
+import { SepetComponent } from '../component/sepet/sepet.component';
 
 const routes: Routes = [
   { path: '', component: ThirdComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
       { path: '', component: UrunComponent },
       { path: 'urun', component: UrunComponent },
       { path: 'about', component: AboutComponent },
-      { path: 'upload', component: UploadUrunComponent}
+      { path: 'upload', component: UploadUrunComponent},
+      { path: 'sepet' , component: SepetComponent},
     ],
   },
 

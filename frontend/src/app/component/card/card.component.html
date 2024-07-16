@@ -1,8 +1,15 @@
 <div class="card" style="width: 18rem;">
-    <img *ngIf="imageUrl" [src]="imageUrl" class="card-img-top" alt="Card image">
-    <div class="card-body">
-      <h5 class="card-title">{{ title }}</h5>
-      <p class="card-text">{{ description }}</p>
-      <a href="#" class="btn btn-secondary">Satın Al</a>
-    </div>
+  <img *ngIf="imageUrl" [src]="imageUrl" style="height: 250px; width: auto;" class="m-2 card-img-top" alt="Card image">
+  <div class="card-body">
+    <h5 class="card-title">{{ title }}</h5>
+    <p class="card-text">{{ description }}</p>
+    <p class="card-text"><small class="text-muted">Ürün ID: {{ responseId }}</small></p>
+    @if (flag) {
+      <hr>
+      <button (click)="sepeteEkle(responseId)" class="btn btn-primary">Sepete Ekle</button>
+    }@else {
+      <hr>
+      <p class="card-text"><small class="text-bold">Stokta Yok</small></p>
+    }
   </div>
+</div>

@@ -1,9 +1,8 @@
 <div class="container mt-5 text-center">
   <div class="row align-items-center">
-    <div class="col" *ngFor="let response of responseData">
-      <app-card class="col" title="{{response.title}}" description="{{response.description}}"
-        imageUrl="{{response.imageurl}}"></app-card>
+    <div class="col" *ngFor="let item of responseData">
+      <app-card class="col" [title]="item.title" [description]="item.description"
+        [imageUrl]="item.imageurl" [responseId]="item.id" [flag]="item.stockstatus"></app-card>
     </div>
-
   </div>
 </div>

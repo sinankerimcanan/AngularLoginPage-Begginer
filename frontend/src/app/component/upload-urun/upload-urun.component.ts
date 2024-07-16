@@ -8,6 +8,7 @@ import { AlertService } from '../alert/alert.service';
 import { response } from 'express';
 import { error } from 'console';
 
+
 @Component({
   selector: 'app-upload-urun',
   templateUrl: './upload-urun.component.html',
@@ -52,5 +53,20 @@ export class UploadUrunComponent {
         'warning'
       );
     }
+  }
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.convertToBase64(file);
+  }
+
+  convertToBase64(file: File) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.itemsForm.patchValue({ imageurl: reader.result });
+    };
+    reader.onerror = (error) => {
+      console.error('Error: ', error);
+    };
   }
 }

@@ -1,5 +1,5 @@
 export type Items = {
-    _id?: number
+    id: number
   title: string
   imageurl: string
   stockstatus: boolean
