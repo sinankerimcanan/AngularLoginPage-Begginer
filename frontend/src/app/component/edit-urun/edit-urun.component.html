@@ -1,0 +1,8 @@
+<div class="container mt-5 text-center">
+
+  <select (change)="onSelectedChange($event)" class="form-select" aria-label="Default select example">
+    <option selected>Güncellemek Istediğiniz Ürünü Seçiniz</option>
+    <option *ngFor="let item of responseData" value="{{item.id}}">{{item.id}} - {{item.title}} </option>
+  </select>
+  <button (click)="onSubmit()"> Güncellemek </button>
+</div>

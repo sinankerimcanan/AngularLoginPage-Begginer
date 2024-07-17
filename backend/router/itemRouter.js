@@ -55,4 +55,43 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put("/update/:userId", async (req, res) => {
+  try {
+    const id = req.params; // params'dan userId alınır
+    
+
+    const { title, imageurl, stockstatus, description } = req.body; // Request body'sinden güncellenecek değerler alınır
+
+    const text = "UPDATE items SET title = $1, imageurl = $2, stockstatus = $3, description = $4 WHERE id = $5 RETURNING *";
+    const values = [title, imageurl, stockstatus, description, id]; // Güncellenecek değerler ve userId dizisi
+
+    const { rows } = await postgresClient.query(text, values); // PostgreSQL sorgusu çalıştırılır
+
+    if (!rows.length) {
+      return res.status(404).json({ message: "Kullanıcı bulunmadı" });
+    }
+
+    return res.status(200).json({ updateUser: rows[0] });
+  } catch (error) {
+    console.error("Error occurred", error.message);
+    return res.status(400).json({ message: error.message });
+  }
+});
+
+router.delete("/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const text = "DELETE FROM users WHERE id = $1 RETURNING *";
+    const values = [userId];
+    const { rows } = await postgresClient.query(text, values);
+    if (!rows.length) {
+      return res.status(404).json({ message: "Kullanıcı bulunmadı" });
+    }
+    return res.status(200).json({ updateUser: rows[0] });
+  } catch (error) {
+    console.log("Error occured", error.message);
+    return res.status(400).json({ message: error.message });
+  }
+});
+
 export default router;

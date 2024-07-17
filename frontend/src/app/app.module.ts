@@ -23,6 +23,7 @@ import { UrunComponent } from './component/urun/urun.component';
 import { AboutComponent } from './component/about/about.component';
 import { UploadUrunComponent } from './component/upload-urun/upload-urun.component';
 import { SepetComponent } from './component/sepet/sepet.component';
+import { EditUrunComponent } from './component/edit-urun/edit-urun.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SepetComponent } from './component/sepet/sepet.component';
     AboutComponent,
     UploadUrunComponent,
     SepetComponent,
+    EditUrunComponent,
   ],
   imports: [
     BrowserModule,

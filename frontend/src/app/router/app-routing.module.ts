@@ -9,6 +9,7 @@ import { UrunComponent } from '../component/urun/urun.component';
 import { AboutComponent } from '../component/about/about.component';
 import { UploadUrunComponent } from '../component/upload-urun/upload-urun.component';
 import { SepetComponent } from '../component/sepet/sepet.component';
+import { EditUrunComponent } from '../component/edit-urun/edit-urun.component';
 
 const routes: Routes = [
   { path: '', component: ThirdComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'upload', component: UploadUrunComponent},
       { path: 'sepet' , component: SepetComponent},
+      { path: 'edit' , component: EditUrunComponent},
     ],
   },
 

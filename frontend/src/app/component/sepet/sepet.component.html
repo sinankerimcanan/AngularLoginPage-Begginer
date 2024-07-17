@@ -1,16 +1,22 @@
 <div class="container mt-5 text-center">
-    <div class="row align-items-center">
-      <div class="col" *ngFor="let item of responseData">
-        <div class="card" style="width: 18rem;">
-            <img *ngIf="item.imageurl" [src]="item.imageurl" style="height: 250px; width: auto;" class="m-2 card-img-top" alt="Card image">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.title }}</h5>
-              <p class="card-text">{{ item.description }}</p>
-              <p class="card-text"><small class="text-muted">Ürün ID: {{ item.id }}</small></p>
-              
-            </div>
-          </div>
+  @if (responseData.length === 0) {
+  <h1>SEPET BOŞ</h1>
+  }
+  @else {
+  <div class="row align-items-center">
+
+    <div class="col" *ngFor="let item of responseData">
+      <div class="card" style="width: 18rem;">
+        <img *ngIf="item.imageurl" [src]="item.imageurl" style="height: 250px; width: auto;" class="m-2 card-img-top"
+          alt="Card image">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.title }}</h5>
+          <p class="card-text">{{ item.description }}</p>
+          <p class="card-text"><small class="text-muted">Ürün ID: {{ item.id }}</small></p>
         </div>
+      </div>
     </div>
-    <button (click)="clearSepet()" class="mt-3 btn btn-secondary">Sepeti Boşalt</button>
   </div>
+  }
+  <button (click)="clearSepet()" class="mt-3 btn btn-secondary">Sepeti Boşalt</button>
+</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Items } from '../../types/items';
@@ -8,6 +8,8 @@ import { AlertService } from '../alert/alert.service';
 import { response } from 'express';
 import { error } from 'console';
 import { SepetService } from '../../service/sepet.service';
+import { Subscription } from 'rxjs';
+import { RefreshService } from '../../service/refresh.service';
 
 @Component({
   selector: 'app-sepet',
@@ -15,29 +17,47 @@ import { SepetService } from '../../service/sepet.service';
   styleUrl: './sepet.component.css',
 })
 export class SepetComponent {
+  private refreshSubscription!: Subscription;
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder,
+    private itemService: SepetService,
+    private alertService: AlertService,
+    private router: Router,
+    private refreshService: RefreshService
+  ) {}
+  responseData: Items[] = [];
 
-    constructor(
-      private http: HttpClient,
-      private fb: FormBuilder,
-      private itemService: SepetService,
-      private alertService: AlertService,
-      private router: Router
-    ) {}
-    responseData: Items[] = [];
-
-    
   clearSepet() {
+    console.log('Butona tıklandı');
     localStorage.removeItem('sepet');
+    this.reloadComponent()
   }
-  ngOnInit(): void {
+  ngOnInit() {
     this.fetchDataFromBackend();
+    this.refreshSubscription = this.refreshService.refresh$.subscribe(() => {
+      this.loadData();
+    });
+  }
+  ngOnDestroy() {
+    this.refreshSubscription.unsubscribe();
+  }
+
+  reloadComponent() {
+    this.refreshService.triggerRefresh();
+  }
+
+  loadData() {
+    console.log("aaa")
+    this.responseData = []
+    console.log(this.responseData)
   }
 
   fetchDataFromBackend() {
     const array = localStorage.getItem('sepet');
     let sepet: number[] = array ? JSON.parse(array) : [];
     if (sepet.length > 0) {
-      console.log("Array içi dolu");
+      console.log('Array içi dolu');
       this.itemService.getItems(sepet).subscribe(
         (response) => {
           this.responseData = response;
